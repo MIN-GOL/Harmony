@@ -750,12 +750,12 @@ struct Index {
   // @State randomIndex: number = -1
   //
   // @State images: ImageCount[] = [
-  //   { url: 'app.media.bg_00', count: 0},
-  //   { url: 'app.media.bg_01', count: 0},
-  //   { url: 'app.media.bg_02', count: 0},
-  //   { url: 'app.media.bg_03', count: 0},
-  //   { url: 'app.media.bg_04', count: 0},
-  //   { url: 'app.media.bg_05', count: 0}
+  //   { url: 'app.media.bg_00', count: 1},
+  //   { url: 'app.media.bg_01', count: 1},
+  //   { url: 'app.media.bg_02', count: 1},
+  //   { url: 'app.media.bg_03', count: 1},
+  //   { url: 'app.media.bg_04', count: 1},
+  //   { url: 'app.media.bg_05', count: 1}
   // ]
   //
   // // 控制抽卡遮罩参数
@@ -930,39 +930,101 @@ struct Index {
   //   )
   // }
 
+  // Extend组件
+  // build() {
+  //   Column() {
+  //     Text('MINGOL')
+  //
+  //     Swiper() {
+  //       Text('1')
+  //         .bannerExtend(Color.Orange, '轮播图1')
+  //       Text('2')
+  //         .bannerExtend(Color.Green, '轮播图2')
+  //       Text('3')
+  //         .bannerExtend(Color.Blue, '轮播图3')
+  //     }
+  //     .width('100%')
+  //     .height(150)
+  //   }
+  //   .width('100%')
+  //   .justifyContent(FlexAlign.Center)
+  // }
 
+  // style组件
+  // @State message: string = '@style'
+  // @State bgColor: ResourceColor = Color.Gray
+  // @Styles setBg() {
+  //   .backgroundColor(this.bgColor)
+  //   .onClick(()=> {
+  //     this.bgColor = Color.Orange
+  //   })
+  // }
+  //
+  // build() {
+  //   Column({space: 10}) {
+  //     Text(this.message)
+  //       .fontColor(Color.White)
+  //       .commonStyles()
+  //       .setBg()
+  //       .textAlign(TextAlign.Center)
+  //
+  //     Column() {}
+  //       .commonStyles()
+  //       .setBg()
+  //
+  //     Button('按钮')
+  //       .commonStyles()
+  //       .setBg()
+  //   }
+  //   .width('100%')
+  //   .height('100%')
+  //   .justifyContent(FlexAlign.Center)
+  // }
+
+  // Scroll组件
   build() {
     Column() {
-      Text('MINGOL')
-
-      Swiper() {
-        Text('1')
-          .bannerExtend(Color.Orange, '轮播图1')
-        Text('2')
-          .bannerExtend(Color.Green, '轮播图2')
-        Text('3')
-          .bannerExtend(Color.Blue, '轮播图3')
+      Scroll() {
+        Column({ space: 10 }) {
+          ForEach(Array.from({ length: 10 }), (item: string, index) => {
+            Text('测试文本' + (index + 1))
+              .width('100%')
+              .height(100)
+              .textAlign(TextAlign.Center)
+              .backgroundColor(Color.Orange)
+              .fontSize(20)
+              .fontColor(Color.White)
+              .borderRadius(10)
+          })
+        }
+        .padding(10)
+        .width('100%')
       }
       .width('100%')
-      .height(150)
+      .height(400)
     }
-    .width('100%')
-    .justifyContent(FlexAlign.Center)
   }
 }
 
-@Extend(Text)
-function bannerExtend (bgColor: ResourceColor, msg: string) {
-  .textAlign(TextAlign.Center)
-  .backgroundColor(bgColor)
-  .fontColor(Color.White)
-  .fontSize(30)
-  .onClick(()=> {
-    AlertDialog.show({
-      message: msg
-    })
-  })
-}
+
+// @Styles function commonStyles () {
+//   .width(100)
+//   .height(100)
+// }
+
+// Extend组件
+// @Extend(Text)
+// function bannerExtend (bgColor: ResourceColor, msg: string) {
+//   .textAlign(TextAlign.Center)
+//   .backgroundColor(bgColor)
+//   .fontColor(Color.White)
+//   .fontSize(30)
+//   .onClick(()=> {
+//     AlertDialog.show({
+//       message: msg
+//     })
+//   })
+// }
 
 // 声明接口(数据结构) - 抽卡专属
 // interface ImageCount {
