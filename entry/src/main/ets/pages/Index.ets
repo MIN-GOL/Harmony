@@ -1019,8 +1019,52 @@ struct Index {
   //   .width('100%')
   // }
 
-  build() {
+  // 小米有品 - Tab
+  @State selectedIndex: number = 0   // 初始化索引
+  @Builder
+  myBuilder(itemIndex: number, title: string, img: ResourceStr, selImg: ResourceStr) {
+    Column() {
+      Image(itemIndex == this.selectedIndex ? selImg : img)
+        .width(30)
+      Text(title)
+        .fontColor(itemIndex == this.selectedIndex ? Color.Orange : Color.Black)
+    }
+  }
 
+  @Builder
+  centerBuilder() {
+    Image($r('app.media.ic_reuse_02'))
+      .width(40)
+      .margin({bottom: 10})
+  }
+
+  build() {
+    Tabs({ barPosition: BarPosition.End }) {
+      TabContent() {
+        Text('首页内容')
+      }.tabBar(this.myBuilder(0, '首页', $r('app.media.ic_tabbar_icon_0'), $r('app.media.ic_tabbar_icon_0_selected')))
+
+      TabContent() {
+        Text('分类内容')
+      }.tabBar(this.myBuilder(1, '分类', $r('app.media.ic_tabbar_icon_1'), $r('app.media.ic_tabbar_icon_1_selected')))
+
+      // 特殊形状Tab
+      TabContent() {
+        Text('活动内容')
+      }.tabBar(this.centerBuilder())
+
+      TabContent() {
+        Text('购物车内容')
+      }.tabBar(this.myBuilder(3, '购物车', $r('app.media.ic_tabbar_icon_2'), $r('app.media.ic_tabbar_icon_2_selected')))
+
+      TabContent() {
+        Text('我的内容')
+      }.tabBar(this.myBuilder(4, '我的', $r('app.media.ic_tabbar_icon_3'), $r('app.media.ic_tabbar_icon_3_selected')))
+
+    }
+    .onChange((index: number) => {
+      this.selectedIndex = index
+    })
   }
 }
 
