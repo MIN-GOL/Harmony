@@ -982,27 +982,45 @@ struct Index {
   // }
 
   // Scroll组件
+  // myScroll: Scroller = new Scroller()  // 实例化
+  // @State yOffset: number = 0
+  //
+  // build() {
+  //   Column() {
+  //     Scroll(this.myScroll) {
+  //       Column() {
+  //         Image($r('app.media.ic_jd_scroll_01'))
+  //         Image($r('app.media.ic_jd_scroll_02'))
+  //         Image($r('app.media.ic_jd_scroll_03'))
+  //       }
+  //     }
+  //     .width('100%')
+  //     .scrollable(ScrollDirection.Vertical) // 滚动方向
+  //     .scrollBar(BarState.Auto) // off一直隐藏 on一直显示 auto滑动显示 停下一会消失
+  //     .edgeEffect(EdgeEffect.Spring)
+  //     .onDidScroll((x, y)=> {
+  //       this.yOffset = this.myScroll.currentOffset().yOffset
+  //     })
+  //
+  //     // 当滑倒400时 显示
+  //     if (this.yOffset > 400) {
+  //       Image($r('app.media.ic_jd_rocket'))
+  //         .width(40)
+  //         .backgroundColor(Color.White)
+  //         .borderRadius(20)
+  //         .padding(5)
+  //         .offset({x: -20, y: -20})
+  //         .onClick(()=>{
+  //           this.myScroll.scrollEdge(Edge.Top)
+  //         })
+  //     }
+  //
+  //   }
+  //   .width('100%')
+  // }
+
   build() {
-    Column() {
-      Scroll() {
-        Column({ space: 10 }) {
-          ForEach(Array.from({ length: 10 }), (item: string, index) => {
-            Text('测试文本' + (index + 1))
-              .width('100%')
-              .height(100)
-              .textAlign(TextAlign.Center)
-              .backgroundColor(Color.Orange)
-              .fontSize(20)
-              .fontColor(Color.White)
-              .borderRadius(10)
-          })
-        }
-        .padding(10)
-        .width('100%')
-      }
-      .width('100%')
-      .height(400)
-    }
+
   }
 }
 
