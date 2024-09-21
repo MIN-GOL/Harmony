@@ -1,3 +1,6 @@
+// 自定义组件
+// import {HelloCom} from '../tools/module1'
+
 @Entry
 @Component
 struct Index {
@@ -1020,54 +1023,179 @@ struct Index {
   // }
 
   // 小米有品 - Tab
-  @State selectedIndex: number = 0   // 初始化索引
-  @Builder
-  myBuilder(itemIndex: number, title: string, img: ResourceStr, selImg: ResourceStr) {
-    Column() {
-      Image(itemIndex == this.selectedIndex ? selImg : img)
-        .width(30)
-      Text(title)
-        .fontColor(itemIndex == this.selectedIndex ? Color.Orange : Color.Black)
-    }
-  }
+  // @State selectedIndex: number = 0   // 初始化索引
+  // @Builder
+  // myBuilder(itemIndex: number, title: string, img: ResourceStr, selImg: ResourceStr) {
+  //   Column() {
+  //     Image(itemIndex == this.selectedIndex ? selImg : img)
+  //       .width(30)
+  //     Text(title)
+  //       .fontColor(itemIndex == this.selectedIndex ? Color.Orange : Color.Black)
+  //   }
+  // }
+  //
+  // @Builder
+  // centerBuilder() {
+  //   Image($r('app.media.ic_reuse_02'))
+  //     .width(40)
+  //     .margin({bottom: 10})
+  // }
+  //
+  // build() {
+  //   Tabs({ barPosition: BarPosition.End }) {
+  //     TabContent() {
+  //       Text('首页内容')
+  //     }.tabBar(this.myBuilder(0, '首页', $r('app.media.ic_tabbar_icon_0'), $r('app.media.ic_tabbar_icon_0_selected')))
+  //
+  //     TabContent() {
+  //       Text('分类内容')
+  //     }.tabBar(this.myBuilder(1, '分类', $r('app.media.ic_tabbar_icon_1'), $r('app.media.ic_tabbar_icon_1_selected')))
+  //
+  //     // 特殊形状Tab
+  //     TabContent() {
+  //       Text('活动内容')
+  //     }.tabBar(this.centerBuilder())
+  //
+  //     TabContent() {
+  //       Text('购物车内容')
+  //     }.tabBar(this.myBuilder(3, '购物车', $r('app.media.ic_tabbar_icon_2'), $r('app.media.ic_tabbar_icon_2_selected')))
+  //
+  //     TabContent() {
+  //       Text('我的内容')
+  //     }.tabBar(this.myBuilder(4, '我的', $r('app.media.ic_tabbar_icon_3'), $r('app.media.ic_tabbar_icon_3_selected')))
+  //
+  //   }
+  //   .onChange((index: number) => {
+  //     this.selectedIndex = index
+  //   })
+  // }
 
-  @Builder
-  centerBuilder() {
-    Image($r('app.media.ic_reuse_02'))
-      .width(40)
-      .margin({bottom: 10})
-  }
+  // 自定义组件
+  // build() {
+  //   Column() {
+  //     HelloCom()
+  //   }
+  //   .width('100%')
+  //   .height(100)
+  //   .backgroundColor(Color.Gray)
+  //   .justifyContent(FlexAlign.Center)
+  // }
 
+  // 成员变量和函数
+  // build() {
+  //   Column() {
+  //     MyPanel()
+  //     MyPanel()
+  //   }
+  //   .width('100%')
+  //   .height('100%')
+  //   .backgroundColor('#ccc')
+  //   .padding(20)
+  // }
+
+  //
   build() {
-    Tabs({ barPosition: BarPosition.End }) {
-      TabContent() {
-        Text('首页内容')
-      }.tabBar(this.myBuilder(0, '首页', $r('app.media.ic_tabbar_icon_0'), $r('app.media.ic_tabbar_icon_0_selected')))
 
-      TabContent() {
-        Text('分类内容')
-      }.tabBar(this.myBuilder(1, '分类', $r('app.media.ic_tabbar_icon_1'), $r('app.media.ic_tabbar_icon_1_selected')))
-
-      // 特殊形状Tab
-      TabContent() {
-        Text('活动内容')
-      }.tabBar(this.centerBuilder())
-
-      TabContent() {
-        Text('购物车内容')
-      }.tabBar(this.myBuilder(3, '购物车', $r('app.media.ic_tabbar_icon_2'), $r('app.media.ic_tabbar_icon_2_selected')))
-
-      TabContent() {
-        Text('我的内容')
-      }.tabBar(this.myBuilder(4, '我的', $r('app.media.ic_tabbar_icon_3'), $r('app.media.ic_tabbar_icon_3_selected')))
-
-    }
-    .onChange((index: number) => {
-      this.selectedIndex = index
-    })
   }
 }
 
+// 自定义组件 - 成员变量和函数
+// @Component
+// struct MyPanel {
+//   // 变量
+//   title: string = '默认大标题'
+//   extra: string = '查看更多 >'
+//
+//   // 成员变量函数
+//   getMore = () => {
+//     AlertDialog.show({
+//       message: '查看更多'
+//     })
+//   }
+//
+//   // 函数
+//   sayHi() {
+//     AlertDialog.show({
+//       message: 'Hello'
+//     })
+//   }
+//
+//   build() {
+//     Column() {
+//       Row() {
+//         Text(this.title)
+//         Text(this.extra)
+//           .onClick(()=>{
+//             this.getMore()
+//           })
+//       }
+//       .width('100%')
+//       .justifyContent(FlexAlign.SpaceBetween)
+//       Row() {
+//         Text('内容')
+//           .onClick(()=>{
+//             this.sayHi()
+//           })
+//       }
+//     }
+//     .padding(10)
+//     .width('100%')
+//     .height(200)
+//     .margin({bottom: 20})
+//     .borderRadius(10)
+//     .backgroundColor('#00cc99')
+//   }
+// }
+
+// 泛型
+// function fn<Type> (param: Type) : Type {
+//   return param
+// }
+//
+// console.log(fn<number>(123)+'')
+
+// 剩余参数和展开运算符
+// function sum(n1:number, n2:number, ...argsArr: number[]) {
+//   let res: number = n1+ n2
+//   for (let item of argsArr) {
+//     res += item
+//   }
+//   console.log(res.toString())
+// }
+// sum(1, 2)
+// sum(1, 2, 3, 4)
+// sum(1, 2, 3, 4, 5, 6)
+
+// 类
+// interface IFood {
+//   name: string
+//   price: number
+//   desc: string
+// }
+//
+// class Food {
+//   name: string
+//   price: number
+//   desc: string
+//
+//   constructor(paramsObj: IFood) {
+//     this.name = paramsObj.name
+//     this.price = paramsObj.price
+//     this.desc = paramsObj.desc
+//   }
+//   eat(num: number) {
+//     console.log(`吃了${num}斤${this.name}`);
+//   }
+// }
+//
+// const f1 = new Food({
+//   name: '土豆',
+//   price: 25,
+//   desc: '脆脆的'
+// })
+//
+//
+// f1.eat(18)
 
 // @Styles function commonStyles () {
 //   .width(100)
