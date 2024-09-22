@@ -1,6 +1,13 @@
 // 自定义组件
 // import {HelloCom} from '../tools/module1'
 
+// 掘金评论
+import InfoTop from '../components/infoTop'
+import InfoItem from '../components/infoItem'
+import InfoBottom from '../components/infoBottom'
+import {CommentData, createListRange} from '../model/CommentData'
+
+
 @Entry
 @Component
 struct Index {
@@ -1084,8 +1091,20 @@ struct Index {
   // 成员变量和函数
   // build() {
   //   Column() {
-  //     MyPanel()
-  //     MyPanel()
+  //     MyPanel({
+  //       title: '我的订单',
+  //       extra: '全部订单 >'
+  //     }) {
+  //       Text('我是订单 - 相关的文本')
+  //     }
+  //
+  //     MyPanel({
+  //       title: '小米有品重酬',
+  //       extra: '7款重酬中 >'
+  //     }) {
+  //       Button('我是小米重酬的按钮')
+  //     }
+  //
   //   }
   //   .width('100%')
   //   .height('100%')
@@ -1093,11 +1112,58 @@ struct Index {
   //   .padding(20)
   // }
 
-  //
-  build() {
+  // BuilderParam - 插槽
+  // build() {
+  //   Column() {
+  //     Text('1')
+  //     SonCom(){
+  //       Button('传入的结构')
+  //     }
+  //   }
+  // }
 
+  @State commentList: CommentData[] = createListRange()
+
+  build() {
+    Column() {
+      // 头
+      InfoTop()
+
+      // 中间
+      List() {
+        ForEach(this.commentList, (item: CommentData, index: number)=> {
+          ListItem() {
+            InfoItem({
+              itemObj: item
+            })
+          }
+        })
+      }
+      .layoutWeight(1)
+      .padding({bottom: 10})
+
+      // 尾部
+      InfoBottom()
+    }
+    .width('100%')
+    .height('100%')
   }
 }
+
+// 插槽
+// @Component
+// struct SonCom {
+//   @BuilderParam ContentBuilder: () => void = this.defaultBuilder
+//   @Builder
+//   defaultBuilder() {
+//     Text('默认的内容')
+//   }
+//   build() {
+//     Column() {
+//       this.ContentBuilder
+//     }
+//   }
+// }
 
 // 自定义组件 - 成员变量和函数
 // @Component
@@ -1120,11 +1186,16 @@ struct Index {
 //     })
 //   }
 //
+//   @BuilderParam ContentBuilder: () => void = this.defaultBuilder
+//   @Builder defaultBuilder () {
+//     Text('默认文本')
+//   }
+//
 //   build() {
 //     Column() {
 //       Row() {
-//         Text(this.title)
-//         Text(this.extra)
+//         Text(this.title).fontSize(18)
+//         Text(this.extra).fontSize(18)
 //           .onClick(()=>{
 //             this.getMore()
 //           })
@@ -1132,10 +1203,7 @@ struct Index {
 //       .width('100%')
 //       .justifyContent(FlexAlign.SpaceBetween)
 //       Row() {
-//         Text('内容')
-//           .onClick(()=>{
-//             this.sayHi()
-//           })
+//         this.ContentBuilder
 //       }
 //     }
 //     .padding(10)
@@ -1143,7 +1211,7 @@ struct Index {
 //     .height(200)
 //     .margin({bottom: 20})
 //     .borderRadius(10)
-//     .backgroundColor('#00cc99')
+//     .backgroundColor('#fff')
 //   }
 // }
 
