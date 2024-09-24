@@ -1,14 +1,10 @@
-import font from '@ohos.font';
 
 @Component
 struct InfoBottom {
-  // 导入矢量图标
-  aboutToAppear(): void {
-    font.registerFont({
-      familyName: 'myfont',
-      familySrc: '/fonts/iconfont.ttf'
-    })
-  }
+  @State txt: string = ''
+  onSubmitComment = (content: string) => {}
+
+
 
   build() {
     Row() {
@@ -18,9 +14,16 @@ struct InfoBottom {
           .fontSize(18)
           .margin({left: 20})
 
-        TextInput({placeholder: '写评论...'})
+        TextInput({
+          placeholder: '写评论...',
+          // $$ -> 双向绑定
+          text: $$this.txt
+        })
           .backgroundColor(Color.Transparent)
           .fontSize(18)
+          .onSubmit(()=> {
+            this.onSubmitComment(this.txt)
+          })
       }
       .height(40)
       .backgroundColor('#F5F6F5')

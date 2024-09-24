@@ -2,6 +2,7 @@
 // import {HelloCom} from '../tools/module1'
 
 // 掘金评论
+import font from '@ohos.font';
 import InfoTop from '../components/infoTop'
 import InfoItem from '../components/infoItem'
 import InfoBottom from '../components/infoBottom'
@@ -1124,17 +1125,77 @@ struct Index {
 
   @State commentList: CommentData[] = createListRange()
 
+  // 导入矢量图标
+  aboutToAppear(): void {
+    font.registerFont({
+      familyName: 'myfont',
+      familySrc: '/fonts/iconfont.ttf'
+    })
+    this.handleSort(0)
+  }
+
+  // 处理喜欢
+  handleLike(index: number) {
+    let itemData = this.commentList[index]
+    if (itemData.isLike) {
+      itemData.likeNum -= 1
+    } else {
+      itemData.likeNum += 1
+    }
+    itemData.isLike = !itemData.isLike
+    // 更新
+    this.commentList.splice(index, 1, itemData)
+  }
+
+  // 处理提交
+  handleSubmit(content: string) {
+    const newItem: CommentData = new CommentData(
+      'https://img.picui.cn/free/2024/09/22/66eff1b5c6b53.jpg',
+      '我',
+      5,
+      0,
+      content,
+      false,
+      $r(null),
+      '',
+      new Date().getTime()
+    )
+    this.commentList = [newItem, ...this.commentList]
+  }
+
+  // 处理排序 0-最新 1-最热
+  handleSort (type: number) {
+    if (type === 0) {
+      this.commentList.sort((a, b) => {
+        return b.time - a.time
+      })
+    }
+    if (type === 1) {
+      this.commentList.sort((a, b) => {
+        return b.likeNum - a.likeNum
+      })
+    }
+  }
+
   build() {
     Column() {
       // 头
-      InfoTop()
+      InfoTop({
+        onSort: (type: number) => {
+          this.handleSort(type)
+        }
+      })
 
       // 中间
       List() {
         ForEach(this.commentList, (item: CommentData, index: number)=> {
           ListItem() {
             InfoItem({
-              itemObj: item
+              index: index,
+              itemObj: item,
+              onLikeClick: (index: number) => {
+                this.handleLike(index)
+              }
             })
           }
         })
@@ -1143,7 +1204,11 @@ struct Index {
       .padding({bottom: 10})
 
       // 尾部
-      InfoBottom()
+      InfoBottom({
+        onSubmitComment: (content: string) => {
+          this.handleSubmit(content)
+        }
+      })
     }
     .width('100%')
     .height('100%')

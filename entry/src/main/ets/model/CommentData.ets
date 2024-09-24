@@ -68,12 +68,12 @@ export const createListRange = (): CommentData[] => {
       'https://img.picui.cn/free/2024/09/22/66eff1b5c6b53.jpg',
       'MINGOL',
       5,
-      20,
+      666,
       '还剩700个单词没背',
-      true,
+      false,
       $r(null),
       '',
-      1727004165000
+      1721004165000
     ),
     new CommentData(
       'https://img.picui.cn/free/2024/09/22/66f00125ed0fb.jpg',
@@ -84,7 +84,7 @@ export const createListRange = (): CommentData[] => {
       true,
       $r(null),
       '',
-      1727004965000
+      1726004965000
     )
   ]
   return result

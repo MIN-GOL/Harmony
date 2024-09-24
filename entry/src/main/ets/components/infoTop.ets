@@ -13,6 +13,7 @@ function fancyButton (isOn: boolean) {
 @Component
 struct InfoTop {
   @State isOn: boolean = true
+  onSort = (type: number) => {}
 
   build() {
     Row(){
@@ -24,11 +25,17 @@ struct InfoTop {
       Row() {
         Button('最新', {stateEffect: false})
           .fancyButton(this.isOn)
-          .onClick(()=> this.isOn = true)
+          .onClick(()=> {
+            this.isOn = true
+            this.onSort(0)
+          })
 
         Button('最热', {stateEffect: false})
           .fancyButton(!this.isOn)
-          .onClick(()=> this.isOn = false)
+          .onClick(()=> {
+            this.isOn = false
+            this.onSort(1)
+          })
       }
       .backgroundColor('#F7F8FA')
       .borderRadius(20)
