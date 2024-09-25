@@ -2,12 +2,13 @@
 // import {HelloCom} from '../tools/module1'
 
 // 掘金评论
-import font from '@ohos.font';
-import InfoTop from '../components/infoTop'
-import InfoItem from '../components/infoItem'
-import InfoBottom from '../components/infoBottom'
-import {CommentData, createListRange} from '../model/CommentData'
+// import font from '@ohos.font';
+// import InfoTop from '../components/infoTop'
+// import InfoItem from '../components/infoItem'
+// import InfoBottom from '../components/infoBottom'
+// import {CommentData, createListRange} from '../model/CommentData'
 
+import router from '@ohos.router';
 
 @Entry
 @Component
@@ -1123,97 +1124,280 @@ struct Index {
   //   }
   // }
 
-  @State commentList: CommentData[] = createListRange()
+  // 掘金评论
+  // @State commentList: CommentData[] = createListRange()
+  //
+  // // 导入矢量图标
+  // aboutToAppear(): void {
+  //   font.registerFont({
+  //     familyName: 'myfont',
+  //     familySrc: '/fonts/iconfont.ttf'
+  //   })
+  //   this.handleSort(0)
+  // }
+  //
+  // // 处理喜欢
+  // handleLike(index: number) {
+  //   let itemData = this.commentList[index]
+  //   if (itemData.isLike) {
+  //     itemData.likeNum -= 1
+  //   } else {
+  //     itemData.likeNum += 1
+  //   }
+  //   itemData.isLike = !itemData.isLike
+  //   // 更新
+  //   this.commentList.splice(index, 1, itemData)
+  // }
+  //
+  // // 处理提交
+  // handleSubmit(content: string) {
+  //   const newItem: CommentData = new CommentData(
+  //     'https://img.picui.cn/free/2024/09/22/66eff1b5c6b53.jpg',
+  //     '我',
+  //     5,
+  //     0,
+  //     content,
+  //     false,
+  //     $r(null),
+  //     '',
+  //     new Date().getTime()
+  //   )
+  //   this.commentList = [newItem, ...this.commentList]
+  // }
+  //
+  // // 处理排序 0-最新 1-最热
+  // handleSort (type: number) {
+  //   if (type === 0) {
+  //     this.commentList.sort((a, b) => {
+  //       return b.time - a.time
+  //     })
+  //   }
+  //   if (type === 1) {
+  //     this.commentList.sort((a, b) => {
+  //       return b.likeNum - a.likeNum
+  //     })
+  //   }
+  // }
+  //
+  // build() {
+  //   Column() {
+  //     // 头
+  //     InfoTop({
+  //       onSort: (type: number) => {
+  //         this.handleSort(type)
+  //       }
+  //     })
+  //
+  //     // 中间
+  //     List() {
+  //       ForEach(this.commentList, (item: CommentData, index: number)=> {
+  //         ListItem() {
+  //           InfoItem({
+  //             index: index,
+  //             itemObj: item,
+  //             onLikeClick: (index: number) => {
+  //               this.handleLike(index)
+  //             }
+  //           })
+  //         }
+  //       })
+  //     }
+  //     .layoutWeight(1)
+  //     .padding({bottom: 10})
+  //
+  //     // 尾部
+  //     InfoBottom({
+  //       onSubmitComment: (content: string) => {
+  //         this.handleSubmit(content)
+  //       }
+  //     })
+  //   }
+  //   .width('100%')
+  //   .height('100%')
+  // }
 
-  // 导入矢量图标
-  aboutToAppear(): void {
-    font.registerFont({
-      familyName: 'myfont',
-      familySrc: '/fonts/iconfont.ttf'
-    })
-    this.handleSort(0)
-  }
+  // LINK的运用
+  // @State count: number = 0
+  // build() {
+  //   Column() {
+  //     Text('父组件')
+  //       .fontSize(30)
+  //     Text(this.count.toString())
+  //     Button('修改数据')
+  //       .onClick(()=> {
+  //         this.count = 1
+  //       })
+  //     SonComponment({
+  //       count: this.count
+  //     })
+  //   }
+  // }
 
-  // 处理喜欢
-  handleLike(index: number) {
-    let itemData = this.commentList[index]
-    if (itemData.isLike) {
-      itemData.likeNum -= 1
-    } else {
-      itemData.likeNum += 1
-    }
-    itemData.isLike = !itemData.isLike
-    // 更新
-    this.commentList.splice(index, 1, itemData)
-  }
+  // Provide的使用
+  // @Provide themeColor: string = 'yellow'
+  // build() {
+  //   Column() {
+  //     Text('顶级组件')
+  //       .fontSize(30)
+  //       .fontWeight(900)
+  //
+  //     ParentComponent()
+  //   }
+  //   .width('100%')
+  //   .height('100%')
+  //   .justifyContent(FlexAlign.Center)
+  //   .backgroundColor('#efefef')
+  // }
 
-  // 处理提交
-  handleSubmit(content: string) {
-    const newItem: CommentData = new CommentData(
-      'https://img.picui.cn/free/2024/09/22/66eff1b5c6b53.jpg',
-      '我',
-      5,
-      0,
-      content,
-      false,
-      $r(null),
-      '',
-      new Date().getTime()
-    )
-    this.commentList = [newItem, ...this.commentList]
-  }
-
-  // 处理排序 0-最新 1-最热
-  handleSort (type: number) {
-    if (type === 0) {
-      this.commentList.sort((a, b) => {
-        return b.time - a.time
-      })
-    }
-    if (type === 1) {
-      this.commentList.sort((a, b) => {
-        return b.likeNum - a.likeNum
-      })
-    }
-  }
+  // ObjectLink 监听
+  // @State personList: Person[] = [
+  //   new Person({
+  //     id: 1,
+  //     name: '张三',
+  //     age: 18
+  //   }),
+  //   new Person({
+  //     id: 2,
+  //     name: '李四',
+  //     age: 20
+  //   }),
+  //   new Person({
+  //     id: 3,
+  //     name: '王五',
+  //     age: 22
+  //   })
+  // ]
+  //
+  // build() {
+  //   Column() {
+  //     Text('父组件')
+  //       .fontSize(30)
+  //       .fontWeight(900)
+  //       .margin({ top: 20 })
+  //     ForEach(this.personList, (item: Person, index: number) => {
+  //       Son({
+  //         info: item
+  //       })
+  //     })
+  //   }
+  //   .width('100%')
+  //   .height('100%')
+  //   .justifyContent(FlexAlign.Start)
+  //   .backgroundColor('#8000cc99')
+  // }
 
   build() {
     Column() {
-      // 头
-      InfoTop({
-        onSort: (type: number) => {
-          this.handleSort(type)
-        }
-      })
-
-      // 中间
-      List() {
-        ForEach(this.commentList, (item: CommentData, index: number)=> {
-          ListItem() {
-            InfoItem({
-              index: index,
-              itemObj: item,
-              onLikeClick: (index: number) => {
-                this.handleLike(index)
-              }
-            })
-          }
+      Text('初始页面')
+        .fontSize(30)
+        .fontWeight(900)
+      Button('跳转')
+        .onClick(()=>{
+          router.pushUrl({
+            url: 'pages/NextPage'
+          })
         })
-      }
-      .layoutWeight(1)
-      .padding({bottom: 10})
-
-      // 尾部
-      InfoBottom({
-        onSubmitComment: (content: string) => {
-          this.handleSubmit(content)
-        }
-      })
     }
     .width('100%')
     .height('100%')
+    .justifyContent(FlexAlign.Center)
   }
 }
+
+// interface IPerson{
+//   id: number
+//   name: string
+//   age: number
+// }
+
+// 观察Observed
+// @Observed
+// class Person {
+//   id: number
+//   name: string
+//   age: number
+//
+//   constructor(obj: IPerson) {
+//     this.id = obj.id
+//     this.name = obj.name
+//     this.age = obj.age
+//   }
+// }
+
+// ObjectLink的使用 - 子组件变化Class的监听
+// @Component
+// struct Son {
+//   @ObjectLink info: Person
+//
+//   build() {
+//     Row() {
+//       Text('名字:' + this.info.name)
+//       Text('年龄:' + this.info.age)
+//       Blank('')
+//       Button('修改数据')
+//         .onClick(() => {
+//           this.info.age ++
+//         })
+//     }
+//     .backgroundColor(Color.Pink)
+//     .padding(10)
+//     .width('100%')
+//   }
+// }
+
+// 父
+// @Component
+// struct ParentComponent {
+//   build() {
+//     Column(){
+//       Text('我是二级组件')
+//         .fontSize(20)
+//         .fontWeight(900)
+//       SonComponent()
+//     }
+//     .width('90%')
+//     .height('50%')
+//     .justifyContent(FlexAlign.Center)
+//     .backgroundColor('#ff76a271')
+//   }
+// }
+
+// 孙
+// @Component
+// struct SonComponent {
+//   @Consume themeColor: string
+//   build() {
+//     Column(){
+//       Text('我是内层组件' + this.themeColor)
+//         .fontSize(20)
+//         .fontWeight(900)
+//     }
+//     .width('60%')
+//     .height('30%')
+//     .justifyContent(FlexAlign.Center)
+//     .backgroundColor('#ff719ca2')
+//   }
+// }
+
+// Link双向绑定
+// @Component
+// struct  SonComponment {
+//   @Link count: number
+//
+//   build() {
+//     Column({space: 20}){
+//       Text('我是子组件')
+//         .fontSize(20)
+//
+//       Text(this.count.toString())
+//
+//       Button('修改Count')
+//         .onClick(()=> {
+//             this.count = 0
+//         })
+//     }
+//   }
+// }
 
 // 插槽
 // @Component
