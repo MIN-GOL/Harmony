@@ -65,7 +65,7 @@ export const createListRange = (): CommentData[] => {
   let result: CommentData[] = new Array()
   result = [
     new CommentData(
-      'https://img.picui.cn/free/2024/09/22/66eff1b5c6b53.jpg',
+      'https://www.helloimg.com/i/2024/10/08/67047f9f998a6.jpg',
       'MINGOL',
       5,
       666,
@@ -76,7 +76,7 @@ export const createListRange = (): CommentData[] => {
       1721004165000
     ),
     new CommentData(
-      'https://img.picui.cn/free/2024/09/22/66f00125ed0fb.jpg',
+      'https://www.helloimg.com/i/2024/10/08/67047f9f7f0d3.jpg',
       '蕾蕾',
       2,
       66,

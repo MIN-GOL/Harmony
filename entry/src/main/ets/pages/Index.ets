@@ -7,8 +7,8 @@
 // import InfoItem from '../components/infoItem'
 // import InfoBottom from '../components/infoBottom'
 // import {CommentData, createListRange} from '../model/CommentData'
-
-import router from '@ohos.router';
+//
+// import router from '@ohos.router';
 
 @Entry
 @Component
@@ -1152,7 +1152,7 @@ struct Index {
   // // 处理提交
   // handleSubmit(content: string) {
   //   const newItem: CommentData = new CommentData(
-  //     'https://img.picui.cn/free/2024/09/22/66eff1b5c6b53.jpg',
+  //     'https://www.helloimg.com/i/2024/10/08/67047f9f998a6.jpg',
   //     '我',
   //     5,
   //     0,
@@ -1286,22 +1286,78 @@ struct Index {
   //   .backgroundColor('#8000cc99')
   // }
 
+  // build() {
+  //   Column() {
+  //     Text('初始页面')
+  //       .fontSize(30)
+  //       .fontWeight(900)
+  //     Button('跳转')
+  //       .onClick(()=>{
+  //         router.pushUrl({
+  //           url: 'pages/NextPage'
+  //         })
+  //       })
+  //   }
+  //   .width('100%')
+  //   .height('100%')
+  //   .justifyContent(FlexAlign.Center)
+  // }
+
+  @State data: items[] = [
+    {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
+    {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
+    {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
+    {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
+    {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
+    {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
+    {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
+  ]
   build() {
-    Column() {
-      Text('初始页面')
-        .fontSize(30)
-        .fontWeight(900)
-      Button('跳转')
-        .onClick(()=>{
-          router.pushUrl({
-            url: 'pages/NextPage'
-          })
+    Scroll(){
+      Column() {
+        Text('商品列表')
+          .fontSize(25)
+          .fontWeight(FontWeight.Bolder)
+          .width('100%')
+          .margin({top: 20, bottom: 20})
+
+        ForEach(this.data, (item:items, index:number) => {
+          Row(){
+            Row(){
+              Image(item.img)
+                .width(100)
+              Column(){
+                Text(item.name)
+                  .fontSize(20)
+                Text(`￥：${item.price.toString()}`)
+                  .fontColor('#fff83232')
+              }
+              .height('100%')
+              .margin({top: 40, left: 20})
+              .justifyContent(FlexAlign.Start)
+            }
+          }
+          .backgroundColor(Color.White)
+          .height(120)
+          .width('100%')
+          .borderRadius(15)
+          .margin({bottom:20})
         })
+
+
+      }
+      .padding({left: 20, right: 20})
+      .backgroundColor('#CCCCCC')
     }
     .width('100%')
     .height('100%')
-    .justifyContent(FlexAlign.Center)
   }
+}
+
+interface items {
+  name: string,
+  price: number,
+  img: Resource
 }
 
 // interface IPerson{
