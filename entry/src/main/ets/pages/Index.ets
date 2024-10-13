@@ -1015,13 +1015,13 @@ struct Index {
   //     })
   //
   //     // 当滑倒400时 显示
-  //     if (this.yOffset > 400) {
+  //     if (this.yOffset > 300) {
   //       Image($r('app.media.ic_jd_rocket'))
   //         .width(40)
   //         .backgroundColor(Color.White)
   //         .borderRadius(20)
   //         .padding(5)
-  //         .offset({x: -20, y: -20})
+  //         .offset({x: 150, y: -80})
   //         .onClick(()=>{
   //           this.myScroll.scrollEdge(Edge.Top)
   //         })
@@ -1303,62 +1303,107 @@ struct Index {
   //   .justifyContent(FlexAlign.Center)
   // }
 
-  @State data: items[] = [
-    {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
-    {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
-    {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
-    {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
-    {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
-    {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
-    {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
-  ]
+  // @State data: items[] = [
+  //   {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
+  //   {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
+  //   {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
+  //   {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
+  //   {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
+  //   {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
+  //   {name:'华为Mate60', price:6999, img:$r('app.media.mate60')},
+  // ]
+  // build() {
+  //   Scroll(){
+  //     Column() {
+  //       Text('商品列表')
+  //         .fontSize(25)
+  //         .fontWeight(FontWeight.Bolder)
+  //         .width('100%')
+  //         .margin({top: 20, bottom: 20})
+  //
+  //       ForEach(this.data, (item:items, index:number) => {
+  //         Row(){
+  //           Row(){
+  //             Image(item.img)
+  //               .width(100)
+  //             Column(){
+  //               Text(item.name)
+  //                 .fontSize(20)
+  //               Text(`￥：${item.price.toString()}`)
+  //                 .fontColor('#fff83232')
+  //             }
+  //             .height('100%')
+  //             .margin({top: 40, left: 20})
+  //             .justifyContent(FlexAlign.Start)
+  //           }
+  //         }
+  //         .backgroundColor(Color.White)
+  //         .height(120)
+  //         .width('100%')
+  //         .borderRadius(15)
+  //         .margin({bottom:20})
+  //       })
+  //
+  //
+  //     }
+  //     .padding({left: 20, right: 20})
+  //     .backgroundColor('#CCCCCC')
+  //   }
+  //   .width('100%')
+  //   .height('100%')
+  // }
+
+  @State ProgressValue: number = 0
   build() {
-    Scroll(){
+    Column() {
       Column() {
-        Text('商品列表')
-          .fontSize(25)
-          .fontWeight(FontWeight.Bolder)
-          .width('100%')
-          .margin({top: 20, bottom: 20})
+        Text('进度条')
+          .fontSize(20)
+          .fontWeight(FontWeight.Bold)
 
-        ForEach(this.data, (item:items, index:number) => {
-          Row(){
-            Row(){
-              Image(item.img)
-                .width(100)
-              Column(){
-                Text(item.name)
-                  .fontSize(20)
-                Text(`￥：${item.price.toString()}`)
-                  .fontColor('#fff83232')
-              }
-              .height('100%')
-              .margin({top: 40, left: 20})
-              .justifyContent(FlexAlign.Start)
+        Progress({value:0, total:100, type:ProgressType.ScaleRing})
+          .width(200)
+          .height(50)
+          .value(this.ProgressValue)
+
+        Row().width('100%').height(5)
+
+        Button('进度条+5')
+          .onClick(()=> {
+            this.ProgressValue += 5
+            if (this.ProgressValue > 100) {
+              this.ProgressValue = 0
             }
-          }
-          .backgroundColor(Color.White)
-          .height(120)
-          .width('100%')
-          .borderRadius(15)
-          .margin({bottom:20})
-        })
-
-
+          })
       }
-      .padding({left: 20, right: 20})
-      .backgroundColor('#CCCCCC')
+      Column() {
+      Text('angle: 45')
+        .fontSize(30)
+      }
+      .margin({top: 20})
+      .width(300)
+      .height(200)
+      .justifyContent(FlexAlign.Center)
+      .borderRadius(10)
+      .linearGradient({
+        angle: 45,
+        colors: [
+          [0xf56c6c, 0.0],
+          [0xfffff, 1.0]
+        ]
+      })
     }
     .width('100%')
     .height('100%')
+    .backgroundColor(Color.White)
   }
 }
 
-interface items {
-  name: string,
-  price: number,
-  img: Resource
-}
+// interface items {
+//   name: string,
+//   price: number,
+//   img: Resource
+// }
 
 // interface IPerson{
 //   id: number
